@@ -82,6 +82,8 @@ Confirm the appointment
 
 Once a date is booked, it is removed from that doctor's available dates.
 
+Technologies Used:
+
 Python 3
 Lists
 Dictionaries
@@ -92,6 +94,36 @@ Functions of built-in Python data structures
 User input/output
 String manipulation
 Basic data management
+
+
+Project Structure
+
+Hospital-Triage-Simulation/
+
+1.) baseproject.py
+
+2.) README.md
+
+How to Run
+
+Step 1: Install Python
+
+Make sure Python 3 is installed on your computer.
+
+You can check this using:
+
+python --version
+
+Step 2: Download/Clone the Project
+
+Place baseproject.py and README.md in the same folder.
+
+Step 3: Run the Program
+
+Open the terminal in the project folder and run:
+
+python VitYarthiProjectCode.py
+
 
 The Main Menu will appear as:
 Which task do you want to proceed with?
@@ -201,3 +233,10 @@ Registration Number: [26BCE11407]
 This project is an educational simulation created for learning Python programming.
 
 It is not a real medical triage or hospital management system and should not be used for actual medical decision-making.
+
+ScreenShots
+
+<img width="366" height="500" alt="image" src="https://github.com/user-attachments/assets/c1d1f776-b34e-438f-9133-59dd79ca365c" />
+
+
+
