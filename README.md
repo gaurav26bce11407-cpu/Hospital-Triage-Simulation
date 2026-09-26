@@ -49,9 +49,13 @@ View booked appointments for a doctor
 View remaining available dates for a doctor
 
 The program contains doctors from four different specialties:
+
 Cardiologist
+
 Orthopedic
+
 Oncologist
+
 Pulmonologist
 
 5. Appointment Booking
@@ -122,6 +126,7 @@ The final score determines the patient's simulated priority level.
 The simulation currently contains four departments:
 
 Cardiologist
+
 Dr. Sharma
 
 Dr. Mehta
@@ -129,6 +134,7 @@ Dr. Mehta
 Dr. Rao
 
 Orthopedic
+
 Dr. Kapoor
 
 Dr. Iyer
@@ -136,6 +142,7 @@ Dr. Iyer
 Dr. Verma
 
 Oncologist
+
 Dr. Sen
 
 Dr. Bannerjee
@@ -143,6 +150,7 @@ Dr. Bannerjee
 Dr. Joshi
 
 Pulmonologist
+
 Dr. Das
 
 Dr. Kulkarni
