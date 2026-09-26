@@ -1,134 +1,161 @@
-Problem Statement and Solution
+Problem Statement & System Requirements Specification
 
 Project Title: VitYarthi Hospital Triage & Specialist Appointment Scheduling System
 
-
 Author: GAURAV RATHI
-
 
 Registration Number: 26BCE11407
 
-
-
-
+Platform : Python 3.14
 
 1. Problem Statement
 
-Modern healthcare facilities which range from emergency triage rooms to outpatient specialty clinics face severe operational bottlenecks that compromise patient care and clinician productivity:
+In both outpatient departments and emergency healthcare intake units, two critical administrative and clinical bottlenecks consistently emerge:
 
-Primary Challenges:
+Subjective Emergency Triage & Delayed Risk Identification:
 
-Subjective Emergency Triage & Delayed Prioritization
+Manual, unstructured patient intake relies heavily on subjective visual judgment or simple first-come-first-served queues. In high-pressure environments, this results in human error where patients suffering from silent, acute physiological distress (such as severe hypoxemia or abnormal tachycardia) wait behind stable patients, substantially elevating the risk of preventable morbidity and mortality.
 
-In high-volume clinical settings, manual assessment of arriving patients without standardized quantitative metrics frequently leads to human error. Patients with critical physiological deterioration (Example - severe hypoxemia or extreme tachycardia) may be improperly queued behind non-urgent cases, leading to preventable complications and elevated mortality risk.
 
-Fragmented Outpatient Scheduling & Calendar Collisions
+2.) Scheduling Conflicts and Inflexible Consultation Booking:
 
-Managing consultations across multiple medical specialties (Cardiology, Orthopedics, Oncology, Pulmonology) using static or manual records often results in:
+Coordinating outpatient consultations across multiple clinical specialties (Cardiology, Orthopedics, Oncology, and Pulmonology) using decentralized or manual registries frequently causes:
 
-Double-booking the same physician on a single date.
+Double-booking: Multiple patients receiving the same specialist slot.
 
-Inflexible scheduling workflows that fail to cater to whether a patient prioritizes a specific physician or a specific consultation date.
+Rigid Scheduling Pathways: Systems typically force users into a single booking flow, failing to support patients who prioritize a specific physician versus those who need a consultation on a specific date.
 
-Lack of real-time schedule synchronization between patient-facing booking desks and doctor-facing portals.
+Provider-Patient Desynchronization: Physicians lack real-time visibility into their booked consultations, remaining availability, and the incoming emergency triage queue.
 
-Data Disconnect Between Emergency Triage and Clinical Staff
+The objective of this project is to implement a unified, algorithmic decision-support and scheduling simulation in Python that automates patient urgency triage using physiological markers and provides dynamic, conflict-free appointment management.
 
-Physicians often lack quick, consolidated visibility into the incoming triage queue alongside their scheduled consultations, leading to delayed situational awareness in the ward.
 
+2. Scope of the Project
+In-Scope:
 
+Algorithmic Triage Prioritization: Quantitative risk scoring based on physiological vital inputs: Oxygen Saturation (SpO2), Heart Rate (BPM), and Age.
 
+Urgency Stratification: Automated classification of patient intake into three distinct priority levels: NORMAL, URGENT!, and CRITICAL!.
 
+Specialty & Physician Roster Management: In-memory modeling of multiple medical disciplines (Cardiologist, Orthopedic, Oncologist, Pulmonologist) with distinct medical staff and date rosters.
 
+Bi-Directional Booking Engine: Dual booking pipelines allowing users to book either by specialist preference (Doctor-First) or by calendar schedule availability (Date-First).
 
+Dynamic Slot Depletion (Collision Prevention): Real-time removal (pop/remove) of consultation dates from a doctor's schedule upon successful booking to guarantee zero duplicate reservations.
 
-2. Proposed Solution
+Provider Dashboard: A dedicated physician portal enabling doctors to review hospital triage patients, inspect patient appointments booked under their name, and audit remaining available dates.
 
+Input Validation: Numeric constraints and type-checking on vitals, menu options, and roster indices to prevent runtime exceptions.
 
-The VitYarthi Hospital Triage Simulation provides a centralized, console-based decision support and dynamic scheduling system built using Python. It resolves the core bottlenecks through automated risk scoring, real-time schedule mutation, and isolated role-based interfaces.
+Out-of-Scope:
 
-Core Solution Modules
+Persistent disk or external relational database integration (all state management is handled in-memory during runtime).
 
-A. Rule-Based Quantitative Triage Engine
+Graphical User Interface (GUI) or web application frontend (interaction is strictly terminal/CLI-based).
 
-To remove subjectivity and clinical delays, the system implements an algorithmic triage evaluator that captures vital indicators and computes a weighted composite risk score:
+External SMS, email, or webhook notification systems for appointment confirmation.
 
-(i) Oxygen Saturation(SpO2):
-<=90% = +5points (Critical Respiratory Distress)
-(90-93)% = +3points (Moderate hypoxemia)
+Integration with clinical hardware/IoT sensors for direct vitals capture.
 
-(ii) Heart Rate
+Patient billing, health insurance processing, and electronic health record (EHR) export.
 
->130BPM or <40BPM = +4points (Severe Cadiac Abnormality)
 
-(111-130)BPM or (40-49)BPM = +2points (Moderate Cardiac Irregularity)
 
+3. Target Users
 
-(iii) Age Factor
+The system is designed to simulate workflows utilized by three primary user groups:
 
->60 = +1point ( Higher risk Demographic )
+Triage Nurses & Emergency Reception Staff:
 
+Front-desk healthcare personnel who record arriving patient vitals, verify physiological parameters, and require instantaneous, algorithmic priority classification to direct critical patients to immediate emergency care.
 
-Automated Queue Stratification:
+Outpatient Coordinators & Helpdesk Staff / Patients:
 
-Score >= 6 [Critical!] (Immediate emergency attention)
+Users booking specialist consultations who require flexible filtering—either matching a patient with a specific expert doctor or finding any available specialist on an urgent, specific calendar date without scheduling collisions.
 
-Score 3-5  [Urgent!]  (Prioritized Clinical Review)
+Consulting Physicians & Medical Specialists:
 
-Score <3   [Normal]   (Standard Outpatient Queue)
+Hospital doctors who need direct visibility into their scheduled consultations, accurate audits of their open calendar dates, and cross-departmental awareness of pending emergency triage cases.
 
+4. High-Level FeaturesA
 
-B. Bi-Directional Dynamic Scheduling Engine
+Quantitative Vital-Signs Triage Engine
 
-The system resolves calendar conflicts and accommodates patient preference by offering two distinct booking pathways:
+Captures physiological vitals: SpO2, Heart Rate, and Age.
 
-Priority by Doctor: Patients select a medical department, pick their desired physician, and view only that physician's open consultation dates.
+Evaluates clinical risk using a multi-factor tiered weighting formula:
 
-Priority by Date: Patients select an intended date from the hospital calendar and are presented with all available specialists across a department who have open capacity on that exact day.
+Oxygen Saturation:
 
+(SpO2): <90% then (+5 points), 
 
+90% - 93% then (+3 points).
 
+Heart Rate (BPM):
 
+>130 or <40(BPM) then (+4 points),
 
+111 - 130 or 40 - 49 (BPM) then (+2 points).
 
-C. Real-Time Slot Collision Prevention
+Age Demographics: >60(years) then (+1 point).
 
+Maps scores to immediate action classifications:
 
-Prevents double-booking through dynamic list mutation (list.pop() and list.remove()).
+(Score)>=6 then CRITICAL!
 
-When a consultation is booked, that specific date is immediately withdrawn from the physician's active availability array in real time, making duplicate bookings impossible across subsequent transactions.
+Score(3 - 5) then URGENT!
 
+(Score) < 3 then NORMAL
 
+Appends comprehensive intake records into a centralized patient registry.
 
 
 
+B. Bi-Directional Specialist Booking System:
 
-D. Integrated Doctor Management Portal
+Pathway 1 (Priority by Doctor): 
 
+Specialty = Doctor the Available Date is Confirmation.
 
+Pathway 2 (Priority by Date):
 
-Provides specialists with immediate access to inspect:
+Specialty = Target Hospital Date then 'List of Available Specialists' on that Day then 'Confirmation'.
 
-The live hospital-wide emergency triage queue.
+Autonomous Calendar Depletion: 
 
-Their personal confirmed patient appointment list (filtered through case-insensitive name matching).
+Immediately isolates and removes confirmed calendar dates from the target doctor's list, ensuring complete concurrency safety within the session.
 
-An audit of their remaining open dates.
+C. Physician Management Interface
 
+Triage Queue Inspection: 
 
+Comprehensive audit of all triage-screened patients and their priority ratings.
 
-4. Expected Impact
+Doctor-Specific Appointment Search: 
 
-Zero Double-Bookings: Automated slot depletion guarantees schedule integrity across all departments.
+Case-insensitive query system allowing doctors to review their upcoming consultations along with patient names and booked dates.
 
-Objective Patient Prioritization: Ensures high-risk patients are flagged instantly based on physiological parameters rather than arrival order alone.
+Remaining Slot Auditing:
 
-Operational Transparency: Synchronizes queue data between patients, reception desks, and consulting doctors in a unified environment.
+Real-time visibility into still-available open consultation dates for any physician in the directory.
 
 
+D. System Diagnostics & Error Handling
 
-(i) Structured Problem Formulation: Explicitly details the core challenges: subjective clinical triage, scheduling collisions/double-booking, and communication gaps between reception and doctors.
+Safe input sanitization utilizing .strip(), .lower(), and .isdigit() checks.
 
-(ii) Engineered Solution Breakdown: Outlines the mathematical triage scoring rules, dual booking workflows, conflict-prevention slot depletion mechanism, and doctor portal.
+Guard rails preventing invalid menu entries, out-of-range date selections, and negative vital-sign inputs.
+
+
+This file covers:
+
+Problem Statement: Detailed breakdown of manual triage subjectivity and scheduling collision bottlenecks.
+
+Scope of the Project: Clear distinction of both in-scope features and out-of-scope boundaries.
+
+Target Users: Personas for triage staff, booking coordinators/patients, and medical specialists.
+
+High-Level Features: Clinical triage scoring logic, bi-directional booking mechanics, dynamic calendar depletion, and the doctor interface.
+
 
 (iii) Visual Workflow Diagram: Demonstrates the end-to-end operational flow from triage to schedule mutation and doctor audit
