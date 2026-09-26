@@ -2,9 +2,14 @@ Problem Statement and Solution
 
 Project Title: VitYarthi Hospital Triage & Specialist Appointment Scheduling System
 
+
 Author: GAURAV RATHI
 
+
 Registration Number: 26BCE11407
+
+
+
 
 
 1. Problem Statement
@@ -33,7 +38,12 @@ Physicians often lack quick, consolidated visibility into the incoming triage qu
 
 
 
+
+
+
+
 2. Proposed Solution
+
 
 The VitYarthi Hospital Triage Simulation provides a centralized, console-based decision support and dynamic scheduling system built using Python. It resolves the core bottlenecks through automated risk scoring, real-time schedule mutation, and isolated role-based interfaces.
 
@@ -48,10 +58,14 @@ To remove subjectivity and clinical delays, the system implements an algorithmic
 (90-93)% = +3points (Moderate hypoxemia)
 
 (ii) Heart Rate
+
 >130BPM or <40BPM = +4points (Severe Cadiac Abnormality)
+
 (111-130)BPM or (40-49)BPM = +2points (Moderate Cardiac Irregularity)
 
+
 (iii) Age Factor
+
 >60 = +1point ( Higher risk Demographic )
 
 
@@ -74,7 +88,11 @@ Priority by Date: Patients select an intended date from the hospital calendar an
 
 
 
+
+
+
 C. Real-Time Slot Collision Prevention
+
 
 Prevents double-booking through dynamic list mutation (list.pop() and list.remove()).
 
@@ -82,7 +100,12 @@ When a consultation is booked, that specific date is immediately withdrawn from 
 
 
 
+
+
+
 D. Integrated Doctor Management Portal
+
+
 
 Provides specialists with immediate access to inspect:
 
