@@ -234,7 +234,9 @@ This project is an educational simulation created for learning Python programmin
 
 It is not a real medical triage or hospital management system and should not be used for actual medical decision-making.
 
-ScreenShots
+ScreenShots 
+
+Showing an example of how to book an appointment in 'Hospital Triage Simulation'!
 
 <img width="366" height="500" alt="image" src="https://github.com/user-attachments/assets/c1d1f776-b34e-438f-9133-59dd79ca365c" />
 
