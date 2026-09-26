@@ -107,9 +107,11 @@ The triage score is calculated using the patient's oxygen level, heart rate, and
 Oxygen Level
 O₂ < 90     → +5 points
 O₂ < 94     → +3 points
+
 Heart Rate
 Heart rate > 130 or < 40 → +4 points
 Heart rate > 110 or < 50 → +2 points
+
 Age
 Age > 60 → +1 point
 
@@ -121,22 +123,30 @@ The simulation currently contains four departments:
 
 Cardiologist
 Dr. Sharma
+
 Dr. Mehta
+
 Dr. Rao
 
 Orthopedic
 Dr. Kapoor
+
 Dr. Iyer
+
 Dr. Verma
 
 Oncologist
 Dr. Sen
+
 Dr. Bannerjee
+
 Dr. Joshi
 
 Pulmonologist
 Dr. Das
+
 Dr. Kulkarni
+
 Dr. Nair
 
 Each doctor initially has availability on the hospital's configured dates.
